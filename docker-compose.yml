@@ -1,0 +1,17 @@
+version: "3"
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "5500:80" # Перенаправляем порт 5500 на порт 80 контейнера
+    volumes:
+      - ./server/html:/usr/share/nginx/html
+
+  nodejs:
+    build:
+      context: ./server # Директория, содержащая код вашего Node.js-сервера
+    ports:
+      - "3001:3001" # Перенаправляем порт 3000 на порт 3000 контейнера
+    volumes:
+      - ./server:/app # Монтируем локальную директорию в контейнер, где находится сервер
+
